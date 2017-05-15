@@ -19,6 +19,58 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/SI5nsLlNUek" frameborder="0" allowfullscreen></iframe>
     <h3>Rails app demo</h3>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/QmOH5NAs330?ecver=1" frameborder="0" allowfullscreen></iframe>
+    <h3>Configuration options</h3>
+	<pre>map port $portnum $detector</pre>
+	<p>Map portnumber to detect as application</p>
+	<p>Example: map port 3306 m</p>
+	<hr />
+	<pre>map4 port $portnum $detector</pre>
+	<p> Same but only for ipv4</p>
+	<hr />
+	<pre>map6 port $portnum $detector</pre>
+	<p> Same but only for ipv6</p>
+	<hr />
+	<pre>con port $portnum deny</pre>
+	<p> Drop ssh connection if port forwarding to specified port starts</p>
+	<hr />
+	<pre>con host $host deny</pre>
+	<p> Drop ssh connection if port forwarding to specified host starts</p>
+	<hr />
+	<pre>bad word $word $detector</pre>
+	<p> Drop ssh connection if buffer contains $word and fd detected as application</p>
+	<hr />
+	<pre>wipe word $word $detector</pre>
+	<p> Replace $word on fd detected as application by spaces</p>
+	<hr />
+	<pre>mysql deny $user $employer</pre>
+	<p> deny mysql coonection by specified user or | and employer</p>
+	<hr />
+	<pre>mysql replace $user $user</pre>
+	<p> replace specified user in connection</p>
+	<hr />
+	<pre>mysql quert count $count</pre>
+	<p> Drop connection if $count of queries was done</p>
+	<hr />
+	<pre>psql deny $user $employer</pre>
+	<p> deny psql coonection by specified user or | and employer</p>
+	<hr />
+	<pre>psql replace $user $user</pre>
+	<p> replace specified user in connection</p>
+	<hr />
+	<pre>psql quert count $count</pre>
+	<p> Drop connection if $count of queries was done</p>
+	<hr />
+	<pre>log file $file -</pre>
+	<p>Log to file $file</p>
+	<hr />
+	<pre>log net4 $host $port</pre>
+	<p>Log by network to specified host:port</p>
+	<hr />
+	<pre>log net6 $host $port</pre>
+	<p>Log by network to specified host:port</p>
+	<hr />
+	
+
     <h3>Security Bricks</h3>
     <ul>
 	<li>Abstract</li>
@@ -36,9 +88,11 @@
     <p>Fatigue is the greatest danger to your application.</p>
     <h4>Highlight ssh keys</h4>
     <p>For example your application deploys on several nodes. But only one node have ssh access. Your employees are connected using the keys.</p>
-    <p>...</p>
+    <p>To highlight keys we may do this</p>
+    <pre>command="/usr/bin/env EMPLOYER=employer_id /bin/bash -l" ssh....</pre>
+    <p>Thus bash startes with highlited ssh-key</p>
     <h4>Marking process tree</h4>
-    <p>...</p>
+    <p>Another way is to join cgroup for process tree.</p>
     <h4>Environment variables</h4>
     <p>...</p>
     <h4>Tunnel handling. drop the bear!</h4>
